@@ -18,11 +18,12 @@
       :default-active="defaultActive"
       :default-openeds="defaultOpens"
       >
-        <el-submenu v-for="(item,index) in items" :key="index" v-if="item.subs" :index="item.index">
-          <template slot="title"><i :class="item.icon"></i><span slot="title">{{ item.title }}</span></template>
-          <el-menu-item class="sub-menu-item" v-for="(subItem,subIndex) in item.subs" :key="subIndex" :index="subItem.index">{{ subItem.title }}</el-menu-item>
-        </el-submenu>
-        <el-menu-item v-for="(item,index) in items" :key="index" v-if="!item.subs" :index="item.index"><i :class="item.icon"></i><span slot="title">{{item.title}}</span></el-menu-item>
+        <div v-for="(item,index) in items" :key="index">
+          <el-submenu v-if="item.hasSubs" :index="item.index">
+            <template slot="title"><i :class="item.icon"></i><span slot="title">{{ item.title }}</span></template>
+            <el-menu-item class="sub-menu-item" v-for="(subItem,subIndex) in item.subs" :key="subIndex" :index="subItem.index">{{ subItem.title }}</el-menu-item>
+          </el-submenu>
+        </div>
       </el-menu>
     </div>
   </div>
@@ -43,6 +44,7 @@ export default {
           index: '1',
           title: '系统设置',
           icon: 'el-icon-setting',
+          hasSubs: true,
           subs: [
             {
               index: '/user',
