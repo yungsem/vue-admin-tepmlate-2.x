@@ -75,7 +75,7 @@ function exportExcel (data, fileName) {
  */
 function getSearchParam (pageIndex, pageSize, sortName, sortOrder, conditions) {
   // 去除 conditions 中的无效字段
-  let newConditions = {}
+  const newConditions = {}
   Object.keys(conditions).forEach(key => {
     if (conditions[key]) {
       newConditions[key] = conditions[key]
@@ -103,7 +103,7 @@ function generateRoutes (routers) {
     const childrenRoutes = []
     for (let i = 0; i < routers.length; i++) {
       if (routers[i].path) {
-        let route = {}
+        const route = {}
         route.path = routers[i].path
         route.component = (resolve) => require(['@/components' + route.path + '/' + routers[i].componentName], resolve)
         childrenRoutes.push(route)
